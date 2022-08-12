@@ -13,4 +13,4 @@ router.post("/register", async (req, res) => {
   }
 });
 
-modules.exports = (app) => app.use("/auth", router);
+module.exports = (app) => app.use("/auth", router);
