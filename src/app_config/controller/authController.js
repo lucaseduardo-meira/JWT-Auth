@@ -59,8 +59,6 @@ router.post("/recover-password", async (req, res) => {
         passwordResetExpires: expire,
       },
     });
-
-    console.log(token, expire);
   } catch (err) {
     res
       .status(400)
