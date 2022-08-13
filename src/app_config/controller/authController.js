@@ -2,8 +2,10 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authConfig = require("../../config/auth.json");
+const crypto = require("crypto");
 
 const User = require("../models/User");
+const { now } = require("mongoose");
 
 const router = express.Router();
 function generateToken(params = {}) {
@@ -38,6 +40,23 @@ router.post("/authenticate", async (req, res) => {
 
   user.password = undefined;
   res.send({ user, token: generateToken({ id: user.id }) });
+});
+
+router.post("/recover-password", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).send({ error: "Usuario não encontrado" });
+
+    const token = crypto.randomBytes(20).toString("hex");
+
+    const expire = new Date();
+    now.setMinutes(now.getMinutes() + 4);
+  } catch (err) {
+    res
+      .status(400)
+      .send({ error: "Erro em esqueci minha senha, tente novamente" });
+  }
 });
 
 module.exports = (app) => app.use("/auth", router);
