@@ -51,7 +51,16 @@ router.post("/recover-password", async (req, res) => {
     const token = crypto.randomBytes(20).toString("hex");
 
     const expire = new Date();
-    now.setMinutes(now.getMinutes() + 4);
+    expire.setMinutes(expire.getMinutes() + 4);
+
+    await User.findByIdAndUpdate(user.id, {
+      $set: {
+        passwordResetToken: token,
+        passwordResetExpires: expire,
+      },
+    });
+
+    console.log(token, expire);
   } catch (err) {
     res
       .status(400)

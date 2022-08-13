@@ -7,8 +7,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // GET request
-require("./controller/projectController")(app);
+require("./app_config/controller/projectController")(app);
 // Authentication
-require("./controller/authController")(app);
+require("./app_config/controller/authController")(app);
 
 app.listen(3000);
