@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authConfig = require("../../config/auth.json");
 const crypto = require("crypto");
+const mailer = require("../../modules/mailer");
 
 const User = require("../models/User");
 const { now } = require("mongoose");
@@ -59,6 +60,23 @@ router.post("/recover-password", async (req, res) => {
         passwordResetExpires: expire,
       },
     });
+
+    mailer.sendMail(
+      {
+        to: email,
+        from: "lucasmeira@gmail.com",
+        template: "recover_password",
+        context: { token },
+      },
+      (err) => {
+        if (err)
+          return res.status(400).send({
+            error: "Não conseguimos enviar o email esqueci minha senha",
+          });
+
+        return res.status(200);
+      }
+    );
   } catch (err) {
     res
       .status(400)
