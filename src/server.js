@@ -9,6 +9,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set("view engine", "ejs");
 
+app.use("/css", express.static(path.resolve(__dirname, "/views")));
+
 app.use("/", require("./app_config/controller/loginController"));
 
 app.listen(3000, () => {
