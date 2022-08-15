@@ -1,8 +1,8 @@
-const express = require("express");
-const router = express.Router();
+// const express = require("express");
+// const router = express.Router();
 
-const services = require("../sevices/render");
+// const services = require("../services/render");
 
-router.get("/", services.home);
+// router.get("/", services.home);
 
-module.exports = router;
+// module.exports = router;

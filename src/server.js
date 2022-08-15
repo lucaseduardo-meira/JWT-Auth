@@ -4,14 +4,13 @@ const path = require("path");
 
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set("view engine", "ejs");
 
-app.use("/css", express.static(path.resolve(__dirname, "/views")));
+app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
 
-app.use("/", require("./app_config/controller/loginController"));
+app.use("/", require("./router/routes"));
 
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");

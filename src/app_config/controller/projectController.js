@@ -1,12 +1,12 @@
-const express = require("express");
-const authMiddleware = require("../middlewares/auth");
+// const express = require("express");
+// const authMiddleware = require("../middlewares/auth");
 
-const router = express.Router();
+// const router = express.Router();
 
-router.use(authMiddleware);
+// router.use(authMiddleware);
 
-router.get("/", (req, res) => {
-  res.send("get ok");
-});
+// router.get("/", (req, res) => {
+//   res.send("get ok");
+// });
 
-module.exports = (app) => app.use("/projects", router);
+// module.exports = (app) => app.use("/projects", router);
