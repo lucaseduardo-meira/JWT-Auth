@@ -9,3 +9,7 @@ exports.register = (req, res) => {
 exports.recover_password = (req, res) => {
   res.render("recover-password");
 };
+
+exports.reset_password = (req, res) => {
+  res.render("reset-password");
+};
