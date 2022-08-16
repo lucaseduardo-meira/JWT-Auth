@@ -74,7 +74,7 @@ module.exports = {
               error: "Não conseguimos enviar o email esqueci minha senha",
             });
 
-          return res.status(200);
+          res.redirect("/reset-password");
         }
       );
     } catch (err) {
