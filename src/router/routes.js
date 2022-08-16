@@ -13,4 +13,7 @@ route.post("/login", authController.authenticate);
 route.get("/register", services.register);
 route.post("/register", authController.create);
 
+// Recover-password page
+route.get("/recover-password", services.recover_password);
+
 module.exports = route;

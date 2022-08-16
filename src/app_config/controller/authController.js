@@ -64,7 +64,7 @@ module.exports = {
       mailer.sendMail(
         {
           to: email,
-          from: "lucasmeira@gmail.com",
+          from: "jwtproject@gmail.com",
           template: "recover_password",
           context: { token },
         },

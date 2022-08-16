@@ -5,3 +5,7 @@ exports.login = (req, res) => {
 exports.register = (req, res) => {
   res.render("register");
 };
+
+exports.recover_password = (req, res) => {
+  res.render("recover-password");
+};
