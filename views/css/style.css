@@ -26,7 +26,13 @@ body * {
   align-items: center;
 }
 
+.card-login > h1 {
+  letter-spacing: 1.5px;
+}
+
 .card-login {
+  width: 50%;
+  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,6 +41,16 @@ body * {
   background: #212121;
   border-radius: 20px;
   box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.register {
+  color: #1db954;
+  text-decoration: none;
+}
+
+.recover {
+  color: white;
+  text-decoration: none;
 }
 
 .card-login > h1 {

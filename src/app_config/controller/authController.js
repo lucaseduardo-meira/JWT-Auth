@@ -16,7 +16,7 @@ function generateToken(params = {}) {
 }
 
 module.exports = {
-  async login(req, res) {
+  async create(req, res) {
     const { email } = req.body;
     try {
       if (await User.findOne({ email }))
