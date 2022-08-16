@@ -3,6 +3,7 @@ const route = express.Router();
 
 const authController = require("../app_config/controller/authController");
 const authMiddleware = require("../app_config/middlewares/auth");
+const loginController = require("../app_config/controller/loginController");
 const services = require("../app_config/services/render");
 
 // Login page
@@ -20,5 +21,10 @@ route.post("/recover-password", authController.recover_password);
 // Reset password page
 route.get("/reset-password", services.reset_password);
 route.post("/reset-password", authController.reset_password);
+
+route.use(authMiddleware);
+
+//Home page
+route.get("/", loginController.login);
 
 module.exports = route;

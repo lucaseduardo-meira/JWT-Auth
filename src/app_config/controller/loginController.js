@@ -1,8 +1,14 @@
-// const express = require("express");
-// const router = express.Router();
+const { name } = require("ejs");
+const express = require("express");
+const authMiddleware = require("../middlewares/auth");
+const route = express.Router();
 
-// const services = require("../services/render");
+const User = require("../models/User");
 
-// router.get("/", services.home);
-
-// module.exports = router;
+module.exports = {
+  async login(req, res) {
+    const user_id = req.userId;
+    const name = await User.findById(user_id, "name");
+    res.render("home", { name });
+  },
+};
