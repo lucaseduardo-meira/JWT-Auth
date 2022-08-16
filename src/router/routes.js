@@ -19,5 +19,6 @@ route.post("/recover-password", authController.recover_password);
 
 // Reset password page
 route.get("/reset-password", services.reset_password);
+route.post("/reset-password", authController.reset_password);
 
 module.exports = route;
