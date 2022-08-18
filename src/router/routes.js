@@ -22,8 +22,6 @@ route.post("/recover-password", authController.recover_password);
 route.get("/reset-password", services.reset_password);
 route.post("/reset-password", authController.reset_password);
 
-route.use(authMiddleware);
-
 //Home page
 route.get("/", loginController.login);
 

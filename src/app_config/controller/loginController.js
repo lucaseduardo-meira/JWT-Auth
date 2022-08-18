@@ -9,6 +9,6 @@ module.exports = {
   async login(req, res) {
     const user_id = req.userId;
     const name = await User.findById(user_id, "name");
-    res.render("home", { name });
+    res.status(200).send(`Usuario ${name}`);
   },
 };

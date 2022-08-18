@@ -24,8 +24,10 @@ module.exports = {
       const user = await User.create(req.body);
 
       user.password = undefined;
+
       return res.send({ user, token: generateToken({ id: user.id }) });
     } catch (err) {
+      console.log(err);
       return res.status(400).send({ error: "Falha no registro" });
     }
   },
