@@ -22,7 +22,4 @@ route.post("/recover-password", authController.recover_password);
 route.get("/reset-password", services.reset_password);
 route.post("/reset-password", authController.reset_password);
 
-//Home page
-route.get("/", loginController.login);
-
 module.exports = route;
