@@ -1,3 +1,2 @@
 config.env
 src/database/index.js
-src/config/mail.json
