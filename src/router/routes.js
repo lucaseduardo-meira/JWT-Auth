@@ -7,8 +7,8 @@ const loginController = require("../app_config/controller/loginController");
 const services = require("../app_config/services/render");
 
 // Login page
-route.get("/login", services.login);
-route.post("/login", authController.authenticate);
+route.get("/", services.login);
+route.post("/", authController.authenticate);
 
 //Register page
 route.get("/register", services.register);

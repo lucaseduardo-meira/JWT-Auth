@@ -41,7 +41,7 @@ module.exports = {
       return res.status(400).send({ error: "Senha invalida" });
 
     user.password = undefined;
-    res.send("Logado:", { user, token: generateToken({ id: user.id }) });
+    res.send({ user, token: generateToken({ id: user.id }) });
   },
   async recover_password(req, res) {
     const { email } = req.body;
