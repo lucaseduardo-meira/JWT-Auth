@@ -65,15 +65,15 @@ module.exports = {
       mailer.sendMail(
         {
           to: email,
-          from: "jwtproject@gmail.com",
+          from: "JWT Project <jwtprojectbylucas@gmail.com>",
           template: "recover_password",
           context: { token },
         },
         (err) => {
-          if (err)
-            return res.status(400).send({
-              error: "Não conseguimos enviar o email esqueci minha senha",
-            });
+          if (err) console.log(err);
+          return res.status(400).send({
+            error: "Não conseguimos enviar o email esqueci minha senha",
+          });
 
           res.redirect("/reset-password");
         }
