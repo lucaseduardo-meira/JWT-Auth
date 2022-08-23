@@ -24,7 +24,8 @@ module.exports = {
       }
       const user = await User.create(req.body);
 
-      return res.send("Você está logado", {
+      return res.send({
+        message: "Logado",
         user,
         token: generateToken({ id: user.id }),
       });
@@ -50,70 +51,83 @@ module.exports = {
       token: generateToken({ id: user.id }),
     });
   },
-  // NOT WORKING
-  // async recover_password(req, res) {
-  //   const { email } = req.body;
-  //   try {
-  //     const user = await User.findOne({ email });
-  //     if (!user)
-  //       return res.status(400).send({ error: "Usuario não encontrado" });
-
-  //     const token = crypto.randomBytes(20).toString("hex");
-
-  //     const expire = new Date();
-  //     expire.setMinutes(expire.getMinutes() + 4);
-
-  //     await User.findByIdAndUpdate(user.id, {
-  //       $set: {
-  //         passwordResetToken: token,
-  //         passwordResetExpires: expire,
-  //       },
-  //     });
-
-  //     mailer.sendMail(
-  //       {
-  //         to: email,
-  //         from: "JWT Project <jwtprojectbylucas@gmail.com>",
-  //         template: "recover_password",
-  //         context: { token },
-  //       },
-  //       (err) => {
-  //         if (err) {
-  //           console.log(err);
-  //           return res.status(400).send({
-  //             error: "Não conseguimos enviar o email esqueci minha senha",
-  //           });
-  //         }
-
-  //         res.redirect("/reset-password");
-  //       }
-  //     );
-  //   } catch (err) {
-  //     res
-  //       .status(400)
-  //       .send({ error: "Erro em esqueci minha senha, tente novamente" });
-  //   }
-  // },
-  async reset_password(req, res) {
-    const { email, password, new_password } = req.body;
-
+  async recover_password(req, res) {
+    const { email } = req.body;
     try {
-      const user = await User.findOne({ email }).select("+password");
+      const user = await User.findOne({ email });
       if (!user)
         return res.status(400).send({ error: "Usuario não encontrado" });
 
-      // if (token !== user.passwordResetToken)
-      //   return res.status(400).send({ error: "Token invalido" });
+      const token = crypto.randomBytes(20).toString("hex");
 
-      // const now = new Date();
+      const expire = new Date();
+      expire.setMinutes(expire.getMinutes() + 4);
 
-      // if (now > user.passwordResetExpires)
-      //   return res.status(400).send({ error: "Token expirado, gere um novo" });
+      await User.findByIdAndUpdate(user.id, {
+        $set: {
+          passwordResetToken: token,
+          passwordResetExpires: expire,
+        },
+      });
 
-      user.password = new_password;
+      mailer.sendMail(
+        {
+          to: email,
+          from: "JWT Project <jwtprojectbylucas@gmail.com>",
+          template: "recover_password",
+          context: { token },
+        },
+        (err) => {
+          if (err) {
+            console.log(err);
+            return res.status(400).send({
+              error: "Não conseguimos enviar o email esqueci minha senha",
+            });
+          }
+
+          res.redirect("/reset-password");
+        }
+      );
+    } catch (err) {
+      res
+        .status(400)
+        .send({ error: "Erro em esqueci minha senha, tente novamente" });
+    }
+  },
+  async reset_password(req, res) {
+    const { email, token, password } = req.body;
+
+    try {
+      const user = await User.findOne({ email }).select(
+        "+passwordResetToken passwordResetExpires"
+      );
+      if (!user)
+        return res.status(400).send({ error: "Usuario não encontrado" });
+
+      if (token !== user.passwordResetToken)
+        return res.status(400).send({ error: "Token invalido" });
+
+      const now = new Date();
+
+      if (now > user.passwordResetExpires)
+        return res.status(400).send({ error: "Token expirado, gere um novo" });
+
+      user.password = password;
 
       await user.save();
-      res.send(user);
+
+      user.password =
+        user.passwordResetToken =
+        user.passwordResetExpires =
+          undefined;
+      // user.passwordResetToken = undefined;
+      // user.passwordResetExpires = undefined;
+
+      res.send({
+        message: "Logado",
+        user,
+        token: generateToken({ id: user.id }),
+      });
     } catch (err) {
       res.status(400).send({ error: "Cannot reset password, try again" });
     }
