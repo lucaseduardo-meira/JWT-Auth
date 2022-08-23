@@ -15,8 +15,8 @@ route.get("/register", services.register);
 route.post("/register", authController.create);
 
 // Recover-password page
-route.get("/recover-password", services.recover_password);
-route.post("/recover-password", authController.recover_password);
+// route.get("/recover-password", services.recover_password);
+// route.post("/recover-password", authController.recover_password);
 
 // Reset password page
 route.get("/reset-password", services.reset_password);
