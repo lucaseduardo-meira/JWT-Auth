@@ -8,6 +8,7 @@
 O sistema de autenticação JWT foi desenvolvido utilizando NodeJS para back-end , MongoDB como banco de dados e o JWT
 
 A aplicação consiste em uma interface simples que permite a criação, login e recuperação de senha de um usuario, enviando um token por email utilizando o NodeMailer
+
 O sistema não faz autenticação em rotas
 
 
