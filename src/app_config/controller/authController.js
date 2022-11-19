@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const authConfig = require("../../config/auth.json");
 const crypto = require("crypto");
 const mailer = require("../../modules/mailer");
+const email_validator = require("email-validator");
 
 const User = require("../models/User");
 const { now } = require("mongoose");
@@ -18,6 +19,11 @@ function generateToken(params = {}) {
 module.exports = {
   async create(req, res) {
     const { email } = req.body;
+
+    if (!email_validator.validate(email)) {
+      return res.status(400).send({ error: "Email invalido" });
+    }
+
     try {
       if (await User.findOne({ email })) {
         return res.status(400).send({ error: "Usuario já existe" });
