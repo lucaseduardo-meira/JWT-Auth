@@ -36,17 +36,26 @@ O sistema não faz autenticação em rotas
 Pré-requisitos: npm / yarn
 
 ```bash
-# clonar repositório
-git clone https://https://github.com/lucaseduardo-meira/JWT-Auth
+# Retornar ao diretório inicial
+cd
 
-# entrar na pasta do projeto
+# Criar diretório do projeto
+mkdir jwt
+
+# Ir para o diretório do projeto
+cd jwt
+
+# clonar repositório
+git clone https://github.com/lucaseduardo-meira/JWT-Auth
+
+# Entrar na pasta
 cd JWT-Auth
 
 # instalar dependências
-yarn install
+yarn install / npm install
 
 # executar o projeto
-yarn start
+yarn start / npm start
 
 # Projeto estará rodando na port:3000
 http://localhost:3000/
