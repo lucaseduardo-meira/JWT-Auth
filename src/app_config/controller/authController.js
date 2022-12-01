@@ -126,8 +126,6 @@ module.exports = {
         user.passwordResetToken =
         user.passwordResetExpires =
           undefined;
-      // user.passwordResetToken = undefined;
-      // user.passwordResetExpires = undefined;
 
       res.send({
         message: "Logado",
