@@ -25,5 +25,6 @@ mongoose.connect(mongo_uri, function (error) {
     console.log("Server running on http://localhost:3000");
   });
 });
+mongoose.Promise = global.Promise;
 
 module.exports = mongoose;
