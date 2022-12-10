@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const { connectDB } = require("./src/database/index");
 
 const app = express();
 
@@ -15,6 +16,12 @@ app.use("/", require("./src/router/routes"));
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log("Server running on http://localhost:3000");
+// app.listen(PORT, () => {
+//   console.log("Server running on http://localhost:3000");
+// });
+
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log("Server running on http://localhost:3000");
+  });
 });
