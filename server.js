@@ -6,6 +6,8 @@ const { connectDB } = require("./src/database/index");
 
 const app = express();
 
+console.log(process.env.MONGO_URI);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
