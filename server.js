@@ -4,9 +4,8 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const { connectDB } = require("./src/database/index");
 
-const app = express();
-
 console.log(process.env.MONGO_URI);
+const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
