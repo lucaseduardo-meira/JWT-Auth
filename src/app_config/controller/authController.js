@@ -6,7 +6,7 @@ const crypto = require("crypto");
 const mailer = require("../../modules/mailer");
 const email_validator = require("email-validator");
 
-const User = require("../models/User");
+const User = require("../models/user");
 const { now } = require("mongoose");
 
 const router = express.Router();
@@ -137,5 +137,3 @@ module.exports = {
     }
   },
 };
-
-
