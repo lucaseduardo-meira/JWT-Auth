@@ -3,7 +3,7 @@ const express = require("express");
 const authMiddleware = require("../middlewares/auth");
 const route = express.Router();
 
-const User = require("../models/User");
+const User = require("../models/user");
 
 module.exports = {
   async login(req, res) {
